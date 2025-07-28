@@ -18,11 +18,15 @@ import androidx.room.RoomDatabase
         fun getDatabase(context: Context) : NoteDatabase{
             return INSTANCE?: synchronized(this) {
 
-                Room.databaseBuilder(
+                //Building the actual database
+              val instance =  Room.databaseBuilder(
                     context.applicationContext,
                     NoteDatabase::class.java,
                     "notes_database"
                 ).build()
+
+                INSTANCE = instance
+                instance
             }
         }
     }
